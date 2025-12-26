@@ -1,24 +1,12 @@
 # Quiz Application
 
-This is a Java Swing-based quiz application developed using the MVC architecture. The application provides two distinct portals:
-
-- **Teacher Portal**: Allows teachers to log in, create quizzes, and view past quizzes.
-- **Student Portal**: Enables students to log in, attempt available quizzes, and view their scores.
+This is a Java Swing-based application developed using the MVC architecture. It is a code smell detector tool designed to help identify common code smells in Java projects.
 
 ## Features
 
-### Teacher Portal
-
-- Secure login for teachers.
-- Create new quizzes with multiple questions and options.
-- View student responses and scores for completed quizzes.
-
-### Student Portal
-
-- Secure login for students.
-- View available quizzes assigned by teachers.
-- Attempt quizzes and submit answers.
-- View scores and past performance.
+- Detects common code smells such as Long Method, Large Class, and God Object.
+- Provides a user-friendly interface for analyzing Java source files.
+- Displays results in a clear and organized manner.
 
 ## Prerequisites
 
@@ -45,7 +33,7 @@ You can run the application directly using the Java extension pack in Visual Stu
 Alternatively, you can use the following command in the terminal:
 
 ```sh
-java -cp target/quiz-application-1.0-SNAPSHOT.jar com.scd.quizapp.Main
+java -cp target/codeSmellDetector-1.0-SNAPSHOT.jar com.scd.codeSmellDetector.Main
 ```
 
 ## Project Structure
@@ -60,83 +48,12 @@ quiz-app
 │   │   ├── java
 │   │   │   └── com
 │   │   │       └── scd
-│   │   │           └── quizapp
-│   │   │               ├── controller
-│   │   │               │   ├── LoginController.java
-│   │   │               │   ├── QuizController.java
-│   │   │               │   ├── StudentController.java
-│   │   │               │   └── TeacherController.java
-│   │   │               ├── model
-│   │   │               │   ├── Quiz.java
-│   │   │               │   ├── Student.java
-│   │   │               │   └── Teacher.java
-│   │   │               └── view
-│   │   │                   ├── LoginView.java
-│   │   │                   ├── MainView.java
-│   │   │                   ├── QuizView.java
-│   │   │                   ├── StudentView.java
-│   │   │                   └── TeacherView.java
+│   │   │           ├── codeSmellDetector
+│   │   │           │   ├── controller
+│   │   │           │   ├── model
+│   │   │           │   └── view
+│   │   │           └── Main.java
 │   └── test
 │       └── java
 └── target
-```
-
-## References
-
-This project is referenced and inspired by:
-[https://github.com/zafir100100/QuizApp-Java](https://github.com/zafir100100/QuizApp-Java)
-
-## Future Enhancements
-
-- **Authentication Improvements**: Add password encryption for enhanced security.
-- **Reporting**: Include detailed analytics and progress reports for teachers.
-- **Quiz Timer**: Implement a timer for quizzes.
-- **Database Expansion**: Allow multiple-choice and true/false question types.
-
-## Database Query
-
-```
-CREATE DATABASE if not exists quizapp;
-USE quizapp;
-
-CREATE TABLE quizzes (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(100) NOT NULL
-);
-
-CREATE TABLE questions (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    quiz_id INT,
-    question_text TEXT,
-    correct_answer VARCHAR(255),
-    FOREIGN KEY (quiz_id) REFERENCES quizzes(id) ON DELETE RESTRICT
-);
-
-CREATE TABLE options (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    question_id INT,
-    option_text VARCHAR(255),
-    FOREIGN KEY (question_id) REFERENCES questions(id) ON DELETE CASCADE
-);
-
-CREATE TABLE teachers (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    password VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE students (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    password VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE student_scores (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    student_id INT,
-    quiz_id INT,
-    score INT,
-    FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE,
-    FOREIGN KEY (quiz_id) REFERENCES quizzes(id) ON DELETE CASCADE
-);
 ```
